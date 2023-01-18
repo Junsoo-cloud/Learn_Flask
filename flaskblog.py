@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, flash, redirect
 from forms import RegistrationForm, LoginForm
 import sys 
 app = Flask(__name__)
@@ -27,6 +27,7 @@ posts = [
 ]
 
 @app.route('/')
+
 @app.route('/home')
 def home():
     return render_template('home.html',posts = posts)
@@ -35,28 +36,27 @@ def home():
 def about():
     return render_template('about.html')
 
-@app.route("/register")
+@app.route("/register", methods=['GET', 'POST'])
 def register():
     form = RegistrationForm() # Create Instance
+    if form.validate_on_submit():
+        flash(f'Account created for {form.username.data}!', 'success') 
+        return redirect(url_for('home'))
     return render_template('register.html', title='Register', form=form)
 
-@app.route("/login")
+@app.route("/login", methods=['GET', 'POST'])
 def login():
     form = LoginForm() # Create Instance
+    if form.validate_on_submit():
+        if form.email.data == 'admin@blog.com' and form.password.data == 'password':
+            flash('You have been logged in !', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash('Login Unsuccessful. Please check username and password', 'danger') # Bootstrap -> danger : Red Alert
     return render_template('login.html', title='Login', form=form)
 
-print(len(sys.argv))
-try: 
-    print(sys.argv[1]) 
-except IndexError: 
-    print("No command-line argument provided") 
-
-arg = sys.argv[1] if len(sys.argv) > 1 else "default value" 
-print(type(sys.argv[0]))
-print(sys.argv[0])
-sys.argv.append(80)
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=int(sys.argv[1]))
+    app.run(host='0.0.0.0', port=5000, debug=True, threaded=True)
     
 
 

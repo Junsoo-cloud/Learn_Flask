@@ -1,0 +1,53 @@
+https://flask.palletsprojects.com/en/2.2.x/patterns/flashing/
+
+
+
+
+
+
+
+
+
+* Message Flashing 
+
+: To give a feedback to user
+: make it possible to record a message at the end of a request and access it next request and only next request
+: conbined with a layout template!!
+
+To flash a message use the flash() method, \
+to get hold of the messages you can use get_flashed_messages() \
+which is also available in the templates. 
+
+
+그니까 flash()를 쓰려면, from flask import flash 를 하고
+
+flash("flash하고자 하는 내용")을 한 다음 layout.html template에서 get_flashed_messages()라는 method를 이용해서 messages에다가 저장하면 된다
+
+{% with messages = get_flashed_messages() %}
+
+
+
+* categories를 포함한 flash
+flash(u’Invalid password provided’, ‘error’) -> 두번째 인자(error)가 categories를 받는 parameter
+
+그리고 get_flashed_messages(with_categories=true) () 안에 with_categories=true 써줘야함
+
+
+* Redirect
+
+from flask import redirect
+
+Type_1 : 
+
+@app.route('/')
+def index():
+    return redirect(url_for('login')) -> 바로 login 으로 redirect
+
+Type_2 : 쿼리 스트링이 존재하는 url
+
+@app.route('/')
+def index(): 
+    return redirect(url_for('profile', username="hong"))
+
+
+내일 다시 하자 ㅋㅋ
