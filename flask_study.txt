@@ -51,3 +51,26 @@ def index():
 
 
 내일 다시 하자 ㅋㅋ
+
+
+
+
+* url_for 함수
+
+: url_for 함수는 url 주소값을 가져온다 !
+: 괄호 안에 route 함수명을 넣으면 해당 route가 가지는 url을 불러온다
+: 그리고 다른 parameter는 변수명이다
+
+
+
+* GET, POST, HTTP Method
+
+
+
+
+GET: 페이지에 저장된 정보를 얻기 위해 서버에 요청, 서버는 그 정보를 보냄
+POST: 브라우저가 서버에게 새로운 정보를 *전송* 하도록 요청 -> 정보가 오직 한번 저장 once alert
+
+
+* Flask.request
+
