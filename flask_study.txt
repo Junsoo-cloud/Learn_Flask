@@ -74,3 +74,6 @@ POST: 브라우저가 서버에게 새로운 정보를 *전송* 하도록 요청
 
 * Flask.request
 
+
+
+* cicular import error -> from x import y 인데 x module에서 기존의 파일을 from으로 참조한다면, 계속 서로 참조만 하는 순환에 빠질 것 -> error 발생 
